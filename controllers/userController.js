@@ -80,5 +80,18 @@ const delBook = async (req, res)=>{
         res.status(400).json({msg: error})
     }
 }
+const PutBook = async (req, res)=>{
+    try{
+        const result = await userModel.PutBook(req.params.code, req.body)
+        if(result ==1){
+            res.status(200).json({msg: "Update is Succesfull"})
+        }
+        else{
+            res.status(400).json({msg: "Data Not Found"})
+        }
+    } catch (error){
+        res.status(400).json({msg: error})
+    }
+}
 
-module.exports = {getAllBooks, getBookByCode, addBook, delBook}
+module.exports = {getAllBooks, getBookByCode, addBook, delBook, PutBook}
