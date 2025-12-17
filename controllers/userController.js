@@ -93,5 +93,50 @@ const PutBook = async (req, res)=>{
         res.status(400).json({msg: error})
     }
 }
+const getAllUsers = (req, res) => {
+    try{
+        const users = userModel.getAllUsers()
 
-module.exports = {getAllBooks, getBookByCode, addBook, delBook, PutBook}
+        if(users.length > 0){
+            res.status(200).json({
+                result : users,
+                msg : "Success get All data"
+            })
+        }
+        else{
+            res.status(200).json({
+                result : users,
+                msg : "data not found"
+            })
+        }
+    }catch (error){
+        res.status(500).json({
+            msg : error
+        })
+    }
+}
+
+const getUserById = (req, res) =>{
+    try{
+        console.log(req.params.id);
+
+        const user = userModel.getUserById(req.params.id)
+
+        if(user.length==1){
+            res.status(200).json({
+                data : user,
+                msg : "user found"
+            })
+        } else {
+            res.status(200).json({
+                msg : "user not found"
+            })
+        }
+    }catch(error){
+        res.status(500).json({
+            msg : error
+        })
+    }
+}
+
+module.exports = {getAllBooks, getBookByCode, addBook, delBook, PutBook, getAllUsers, getUserById}

@@ -34,5 +34,19 @@ const PutBook = async(code, data)=>{
     const [result] = await db.query(query,[judul, pengarang, penerbit, code])
     return result.affectedRows
 }
+const dataUser = ['Robi', 'Deni', 'Fera']
+const getAllUsers = () =>{
+    return dataUser
+}
 
-module.exports = {getAllBooks, getBookByCode, addBook, delBook, PutBook}
+const getUserById = (id) =>{
+    const result = []
+    if(id <= dataUser.length){
+        result.push(dataUser[id-1])
+        return result
+    }
+
+    return[]
+}
+
+module.exports = {getAllBooks, getBookByCode, addBook, delBook, PutBook, getAllUsers, getUserById}
